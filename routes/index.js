@@ -29,6 +29,7 @@ router.get('/books/new', (req, res, next) => {
 router.post('/books/new', async (req, res, next) => {
   try {
     const book = await Book.create(req.body);
+    // Redirects to the books listing page after successfully adding a new book
     res.redirect('/books');
   } catch (err) {
     // Handles validation errors and displays them to the user in the new-book view
@@ -39,7 +40,7 @@ router.post('/books/new', async (req, res, next) => {
         errors: err.errors
       });
     } else {
-      throw err;
+      next(err);
     }
   }
 });
@@ -66,6 +67,7 @@ router.post('/books/:id', async (req, res, next) => {
     const book = await Book.findByPk(req.params.id);
     if (book) {
       await book.update(req.body);
+      // Redirects to the books listing page after successfully updating a book
       res.redirect('/books');
     } else {
       const err = new Error('Book Not Found');
@@ -83,7 +85,7 @@ router.post('/books/:id', async (req, res, next) => {
         errors: err.errors
       });
     } else {
-      throw err;
+      next(err);
     }
   }
 });
@@ -94,6 +96,7 @@ router.post('/books/:id/delete', async (req, res, next) => {
     const book = await Book.findByPk(req.params.id);
     if (book) {
       await book.destroy();
+      // Redirects to the books listing page after successfully deleting a book
       res.redirect('/books');
     } else {
       const err = new Error('Book Not Found');
@@ -106,3 +109,4 @@ router.post('/books/:id/delete', async (req, res, next) => {
 });
 
 module.exports = router;
+
