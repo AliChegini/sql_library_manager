@@ -31,3 +31,7 @@ block content
     p
       button(type='submit') Update Book
       a.button(href='/') Cancel
+      
+    //- Delete buttons
+    p
+      button(type='submit', formaction=`/books/${book.id}/delete`, formmethod='POST') Delete Book
