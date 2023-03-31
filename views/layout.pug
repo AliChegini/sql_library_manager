@@ -1,1 +1,18 @@
-// Boilerplate markup view
+doctype html
+html
+  head
+    title #{title}
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header
+      h1 READ MORE BOOKS
+      nav
+        ul
+          li
+            a(href='/books') All Books
+          li
+            a(href='/books/new') New Book
+    main
+      block content
+    footer
+      p READ MORE BOOKS, 2023
